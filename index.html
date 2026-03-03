@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thomas Brett Labouchere | Portfolio</title>
     <style>
-        /* Modern Reset and Variables */
+        /* Variables */
         :root {
             --bg-color: #0f172a;
             --surface-color: #1e293b;
+            --surface-alt: #162032;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --accent: #38bdf8;
             --accent-hover: #0284c7;
+            --border: #334155;
         }
 
         * {
@@ -28,35 +30,36 @@
             line-height: 1.6;
         }
 
-        /* Sticky Navigation */
+        /* Navigation */
         nav {
             position: sticky;
             top: 0;
-            background-color: rgba(15, 23, 42, 0.9);
+            background-color: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(10px);
-            padding: 20px;
+            padding: 16px 20px;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            flex-wrap: wrap;
+            gap: 10px 24px;
             z-index: 1000;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border);
         }
 
         nav a {
-            color: var(--text-main);
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         nav a:hover {
             color: var(--accent);
         }
 
-        /* Container & Sections */
+        /* Layout */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -65,7 +68,7 @@
 
         section {
             padding: 80px 0;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border);
         }
 
         section:last-child {
@@ -73,7 +76,7 @@
         }
 
         h2.section-title {
-            font-size: 2rem;
+            font-size: 1.9rem;
             margin-bottom: 40px;
             color: var(--text-main);
             display: flex;
@@ -84,23 +87,34 @@
         h2.section-title::after {
             content: "";
             height: 1px;
-            background-color: #334155;
+            background-color: var(--border);
             flex-grow: 1;
         }
 
-        /* Hero Section */
+        .section-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        /* Hero */
         #hero {
             min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 100px 0;
-            border-bottom: 1px solid #334155;
+            gap: 40px;
+            border-bottom: 1px solid var(--border);
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
+            font-size: 3.2rem;
+            margin-bottom: 8px;
             line-height: 1.2;
         }
 
@@ -108,31 +122,40 @@
             color: var(--accent);
         }
 
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
         .hero-text p {
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             color: var(--text-muted);
             margin-bottom: 30px;
-            max-width: 500px;
+            max-width: 520px;
         }
 
         .hero-img {
-            width: 280px;
-            height: 280px;
+            width: 270px;
+            height: 270px;
             border-radius: 50%;
             border: 4px solid var(--accent);
             object-fit: cover;
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            flex-shrink: 0;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 28px;
+            padding: 11px 26px;
             background-color: var(--accent);
-            color: #fff;
+            color: #0f172a;
             text-decoration: none;
             border-radius: 6px;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
         .btn:hover {
@@ -144,7 +167,8 @@
             background-color: transparent;
             border: 2px solid var(--accent);
             color: var(--accent);
-            margin-left: 15px;
+            margin-left: 12px;
+            font-weight: 600;
         }
 
         .btn-outline:hover {
@@ -152,60 +176,298 @@
             color: var(--accent);
         }
 
-        /* Grid Layouts for Projects & Courses */
+        /* Skills tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background-color: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Cards */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 22px;
         }
 
         .card {
             background-color: var(--surface-color);
-            padding: 30px;
+            padding: 28px;
             border-radius: 12px;
-            border: 1px solid #334155;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.5);
             border-color: var(--accent);
         }
 
         .card h3 {
             color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+            margin-bottom: 12px;
+            font-size: 1.15rem;
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
-        /* Lists for Experience */
+        .card .card-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        /* Placeholder cards */
+        .card.placeholder {
+            border-style: dashed;
+            opacity: 0.6;
+        }
+
+        .card.placeholder h3 {
+            color: var(--text-muted);
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
         .timeline-item {
-            margin-bottom: 30px;
-            padding-left: 20px;
-            border-left: 2px solid var(--accent);
+            padding: 24px;
+            background-color: var(--surface-color);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .timeline-item .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 6px;
         }
 
         .timeline-item h3 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+            color: var(--text-main);
+        }
+
+        .timeline-item .date {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .timeline-item .org {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-item ul li {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            padding-left: 18px;
+            position: relative;
             margin-bottom: 5px;
         }
 
-        .timeline-item span {
+        .timeline-item ul li::before {
+            content: "▸";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        .timeline-item.placeholder {
+            border-left-color: var(--border);
+            border-left-style: dashed;
+            opacity: 0.6;
+        }
+
+        /* Degree block */
+        .degree-block {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 28px 32px;
+            border: 1px solid var(--border);
+            margin-bottom: 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .degree-block h3 {
+            font-size: 1.3rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .degree-block p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .degree-block .gpa {
+            text-align: right;
+        }
+
+        .degree-block .gpa span {
             display: block;
             color: var(--accent);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Capstone */
+        .capstone-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .capstone-block {
+            background-color: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 22px;
+        }
+
+        .capstone-block h4 {
+            color: var(--accent);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 10px;
         }
 
-        .timeline-item p {
+        .capstone-block p, .capstone-block li {
             color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        .capstone-block ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .capstone-block ul li {
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .capstone-block ul li::before {
+            content: "▸";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        .milestone-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .milestone-table th {
+            text-align: left;
+            color: var(--accent);
+            font-weight: 600;
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .milestone-table td {
+            color: var(--text-muted);
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(51,65,85,0.5);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-draft { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .status-planning { background: rgba(56,189,248,0.15); color: #38bdf8; }
+        .status-pending { background: rgba(148,163,184,0.15); color: #94a3b8; }
+
+        /* Documents */
+        .doc-card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 36px 28px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .doc-icon {
+            font-size: 2.5rem;
+            margin-bottom: 14px;
+        }
+
+        .doc-card h3 {
+            color: var(--text-main);
             margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .doc-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
         }
 
         /* Responsive */
@@ -213,158 +475,398 @@
             #hero {
                 flex-direction: column-reverse;
                 text-align: center;
-                gap: 40px;
+                gap: 36px;
+                padding: 70px 0;
+                min-height: unset;
             }
-            .hero-text p { margin: 0 auto 30px auto; }
-            .btn-outline { margin-left: 0; margin-top: 15px; display: inline-block; }
-            nav { flex-wrap: wrap; justify-content: center; gap: 15px; }
+
+            .hero-text p { margin: 0 auto 28px auto; }
+            .btn-outline { margin-left: 0; margin-top: 12px; display: inline-block; }
+            .hero-text h1 { font-size: 2.4rem; }
+            .tags { justify-content: center; }
+            .degree-block { flex-direction: column; }
+            .degree-block .gpa { text-align: left; }
+            .capstone-grid { grid-template-columns: 1fr; }
+            .timeline-item .job-header { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#hero">About</a>
+        <a href="#about">About</a>
         <a href="#education">Education</a>
         <a href="#projects">Projects</a>
         <a href="#capstone">Capstone</a>
-        <a href="#experience">Experience</a>
-        <a href="#documents">Docs</a>
+        <a href="#it-experience">IT Experience</a>
+        <a href="#other-experience">Other Experience</a>
+        <a href="#volunteer">Volunteer</a>
+        <a href="#documents">Documents</a>
     </nav>
 
     <div class="container">
-        <header id="hero">
+
+        <!-- HERO / ABOUT -->
+        <header id="about">
             <div class="hero-text">
-                <h1>Hi, I'm <span>Thomas Brett Labouchere</span></h1>
-                <p>Focused on network administration, cybersecurity, and solving complex technical challenges.</p>
-                <div>
+                <p class="section-label">Portfolio</p>
+                <h1>Thomas Brett<br><span>Labouchere</span></h1>
+                <p class="hero-subtitle">Network Administration &amp; Cybersecurity</p>
+                <p>AAS candidate at Lake Superior College focused on network architecture, server administration, and cybersecurity. Experienced in enterprise IT environments — from EMR deployments in healthcare to MDM and incident response in manufacturing.</p>
+                <div class="tags">
+                    <span class="tag">Networking</span>
+                    <span class="tag">Cybersecurity</span>
+                    <span class="tag">Windows Server</span>
+                    <span class="tag">Microsoft Intune</span>
+                    <span class="tag">JAMF</span>
+                    <span class="tag">Digital Forensics</span>
+                    <span class="tag">Cisco</span>
+                    <span class="tag">Linux</span>
+                </div>
+                <div style="margin-top: 30px;">
                     <a href="#projects" class="btn">View My Work</a>
                     <a href="resume.pdf" target="_blank" class="btn btn-outline">Download Resume</a>
                 </div>
             </div>
-            <img src="photo.jpg" alt="Thomas Labouchere" class="hero-img">
+            <img src="photo.jpg" alt="Thomas Brett Labouchere" class="hero-img">
         </header>
 
+        <!-- EDUCATION -->
         <section id="education">
-            <h2 class="section-title">Education & Coursework</h2>
-            <div class="timeline-item">
-                <h3>AAS in Network Administration and Cybersecurity</h3>
-                <span>Lake Superior College (LSC) | Expected Spring 2026</span>
-                <p>Focused on network architecture, server administration, hardware support, and cybersecurity essentials.</p>
+            <h2 class="section-title">Education &amp; Coursework</h2>
+
+            <div class="degree-block">
+                <div>
+                    <h3>AAS — Network Administration &amp; Cybersecurity</h3>
+                    <p>Lake Superior College (LSC) &nbsp;·&nbsp; Duluth, MN</p>
+                    <p style="margin-top: 4px; color: var(--accent); font-size: 0.9rem;">Expected Graduation: Spring 2026</p>
+                </div>
+                <div class="gpa">
+                    <p style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Program Focus</p>
+                    <span>Network Admin &amp; Security</span>
+                </div>
             </div>
-            <div class="grid">
+
+            <p class="section-label">Completed Coursework</p>
+            <div class="grid" style="margin-top: 14px;">
                 <div class="card">
+                    <span class="card-tag">Security</span>
                     <h3>Network Security (CIS 2812)</h3>
-                    <p>Covered the fundamentals of safeguarding network infrastructure against common security threats and attacks.</p>
+                    <p>Fundamentals of safeguarding network infrastructure — threat modeling, firewall configuration, VPN setup, and defense-in-depth strategies.</p>
                 </div>
                 <div class="card">
+                    <span class="card-tag">Security</span>
                     <h3>Ethical Hacking (CIS 2814)</h3>
-                    <p>Applied ethical hacking methodologies to perform penetration tests and implement defensive countermeasures.</p>
+                    <p>Penetration testing methodologies using industry tools. Performed vulnerability scanning, exploitation, and post-exploitation analysis in lab environments.</p>
                 </div>
                 <div class="card">
-                    <h3>CISCO Networking I & II</h3>
-                    <p>Focused on managing Cisco hardware, including installation, configuration, and troubleshooting of routers and switches.</p>
+                    <span class="card-tag">Networking</span>
+                    <h3>CISCO Networking I &amp; II</h3>
+                    <p>Installation, configuration, and troubleshooting of Cisco routers and switches. Covers OSI model, subnetting, VLANs, STP, and routing protocols.</p>
                 </div>
                 <div class="card">
-                    <h3>Windows Server Admin</h3>
-                    <p>Gained practical experience in server administration, Active Directory, and configuration for enterprise network services.</p>
+                    <span class="card-tag">Server Admin</span>
+                    <h3>Windows Server Administration</h3>
+                    <p>Practical server administration including Active Directory, Group Policy, DNS/DHCP, file services, and enterprise network configuration.</p>
                 </div>
                 <div class="card">
-                    <h3>Forensics & Incident Response</h3>
-                    <p>Focused on identifying common security threats and attacks and describing how to safeguard against them.</p>
+                    <span class="card-tag">Security</span>
+                    <h3>Forensics &amp; Incident Response</h3>
+                    <p>Digital evidence collection, chain of custody, forensic imaging, and structured incident response procedures using industry-standard tools.</p>
                 </div>
                 <div class="card">
+                    <span class="card-tag">Security</span>
                     <h3>Intrusion Detection</h3>
-                    <p>Covered the factors involved in developing a secure information technology strategy.</p>
+                    <p>Development of secure IT strategy, IDS/IPS deployment, log analysis, and identification of network-based attack patterns and anomalies.</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Systems</span>
+                    <h3>Linux/Unix Administration</h3>
+                    <p>Command-line administration, shell scripting, user/permission management, and service configuration on Linux-based systems.</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Hardware</span>
+                    <h3>PC Hardware &amp; Support (A+ Prep)</h3>
+                    <p>Hands-on hardware diagnostics, component installation, OS deployment, and troubleshooting aligned with CompTIA A+ objectives.</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Web</span>
+                    <h3>Web Programming</h3>
+                    <p>Fundamentals of HTML, CSS, and client-side development. Includes design principles and hosting — as demonstrated by this portfolio.</p>
                 </div>
             </div>
         </section>
 
+        <!-- PROJECTS -->
         <section id="projects">
-            <h2 class="section-title">Projects & Passion</h2>
+            <h2 class="section-title">Projects &amp; Passion</h2>
             <div class="grid">
-                <div class="card">
-                    <h3>[Outside Project Name]</h3>
-                    <p>[Placeholder for project description showing passion outside of the classroom.]</p>
+                <!-- Replace placeholders below with your actual projects -->
+                <div class="card placeholder">
+                    <span class="card-tag">Personal Project</span>
+                    <h3>[Project Name]</h3>
+                    <p>[Describe a personal or outside-of-class project that shows your passion for IT or cybersecurity. What problem did you solve? What tools did you use?]</p>
+                </div>
+                <div class="card placeholder">
+                    <span class="card-tag">Personal Project</span>
+                    <h3>[Project Name]</h3>
+                    <p>[Describe another personal project. Examples: home lab, CTF competition, open-source contribution, self-hosted service, or security research.]</p>
                 </div>
                 <div class="card">
-                    <h3>[Outside Project Name]</h3>
-                    <p>[Placeholder for project description showing passion outside of the classroom.]</p>
+                    <span class="card-tag">Class Project</span>
+                    <h3>This Portfolio Website</h3>
+                    <p>Designed and built a fully responsive personal portfolio from scratch using HTML and CSS — no frameworks. Hosted on GitHub Pages with a custom domain via CNAME.</p>
                 </div>
-                <div class="card">
+                <div class="card placeholder">
+                    <span class="card-tag">Class Project</span>
                     <h3>[Class Project Name]</h3>
-                    <p>[Placeholder for a major project or lab environment completed during coursework.]</p>
+                    <p>[Describe a notable lab or project from your coursework — e.g., a network simulation in Packet Tracer, a security audit, a server build, or a CTF challenge.]</p>
                 </div>
             </div>
         </section>
 
+        <!-- CAPSTONE -->
         <section id="capstone">
             <h2 class="section-title">Capstone Project</h2>
-            <div class="card">
-                <h3>[Capstone Project Title]</h3>
-                <span><strong>Status:</strong> First Draft & Planning Phase</span>
-                <p style="margin-top: 15px;"><strong>Project Overview:</strong> [Placeholder for the first draft description.]</p>
-                <p style="margin-top: 15px;"><strong>Project Management:</strong> [Placeholder for timeline, milestones, and planning details.]</p>
+
+            <div class="card" style="margin-bottom: 22px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <span class="card-tag">Capstone — First Draft</span>
+                        <h3 style="margin-top: 6px;">[Capstone Project Title]</h3>
+                    </div>
+                    <span class="status-badge status-draft">Draft / Planning</span>
+                </div>
+                <p style="margin-top: 14px; color: var(--text-muted);">
+                    [Write a 2–3 sentence overview of your capstone project here. What is the problem you are solving? Who is the end user or client? What is the expected outcome or deliverable?]
+                </p>
+            </div>
+
+            <div class="capstone-grid">
+                <div class="capstone-block">
+                    <h4>Project Objectives</h4>
+                    <ul>
+                        <li>[Primary goal of the project]</li>
+                        <li>[Secondary objective]</li>
+                        <li>[Measurable success criterion]</li>
+                    </ul>
+                </div>
+
+                <div class="capstone-block">
+                    <h4>Scope</h4>
+                    <p><strong style="color: var(--text-main);">In Scope:</strong></p>
+                    <ul style="margin-top: 6px; margin-bottom: 10px;">
+                        <li>[What is included in this project]</li>
+                        <li>[Specific deliverable or system]</li>
+                    </ul>
+                    <p><strong style="color: var(--text-main);">Out of Scope:</strong></p>
+                    <ul style="margin-top: 6px;">
+                        <li>[What will NOT be addressed]</li>
+                    </ul>
+                </div>
+
+                <div class="capstone-block" style="grid-column: 1 / -1;">
+                    <h4>Project Timeline &amp; Milestones</h4>
+                    <table class="milestone-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Milestone</th>
+                                <th>Target Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 — Initiation</td>
+                                <td>Project proposal approved, scope defined</td>
+                                <td>[Month, Year]</td>
+                                <td><span class="status-badge status-draft">In Progress</span></td>
+                            </tr>
+                            <tr>
+                                <td>2 — Planning</td>
+                                <td>Requirements gathered, tools selected, timeline set</td>
+                                <td>[Month, Year]</td>
+                                <td><span class="status-badge status-planning">Upcoming</span></td>
+                            </tr>
+                            <tr>
+                                <td>3 — Execution</td>
+                                <td>[Key implementation milestone]</td>
+                                <td>[Month, Year]</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>4 — Testing</td>
+                                <td>Testing, troubleshooting, and validation complete</td>
+                                <td>[Month, Year]</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>5 — Closeout</td>
+                                <td>Final presentation and documentation delivered</td>
+                                <td>Spring 2026</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="capstone-block">
+                    <h4>Resources &amp; Tools</h4>
+                    <ul>
+                        <li>[Hardware or infrastructure needed]</li>
+                        <li>[Software / platforms / licenses]</li>
+                        <li>[Advisor or stakeholder support]</li>
+                    </ul>
+                </div>
+
+                <div class="capstone-block">
+                    <h4>Risk Assessment</h4>
+                    <ul>
+                        <li>[Risk 1: e.g., scope creep — mitigation strategy]</li>
+                        <li>[Risk 2: e.g., hardware availability — mitigation strategy]</li>
+                        <li>[Risk 3: e.g., time constraints — mitigation strategy]</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <section id="experience">
-            <h2 class="section-title">Experience</h2>
+        <!-- IT WORK EXPERIENCE -->
+        <section id="it-experience">
+            <h2 class="section-title">IT Work Experience</h2>
+            <div class="timeline">
 
-            <div class="timeline-item">
-                <h3>System Administrator II</h3>
-                <span>IWCO Direct | May 2025 - Present</span>
-                <p>• Lead Microsoft Intune implementation and manage the JAMF MacOS environment.</p>
-                <p>• Support Windows 10 to 11 migrations and Windows 10 ESU rollouts for legacy systems.</p>
-                <p>• Conduct digital forensics using Autopsy for incident response as part of the Security Incident Response Team.</p>
-                <p>• Serve as the SME for all production IT issues and automate onboarding/off-boarding processes.</p>
-            </div>
-            
-            <div class="timeline-item">
-                <h3>Field Service Technician</h3>
-                <span>Aspirus Health | Sept 2024 - Apr 2025</span>
-                <p>• Provided IT support for the Emergency Department during EPIC Go-Live, ensuring uninterrupted clinical operations.</p>
-                <p>• Deployed and tracked over 5,000 devices for asset management and audit records.</p>
-                <p>• Coordinated a secure radiology network migration for PACS systems with minimal downtime.</p>
-            </div>
+                <div class="timeline-item">
+                    <div class="job-header">
+                        <h3>System Administrator II</h3>
+                        <span class="date">May 2025 – Present</span>
+                    </div>
+                    <p class="org">[REDACTED]</p>
+                    <ul>
+                        <li>Lead Microsoft Intune implementation and manage the JAMF macOS environment.</li>
+                        <li>Support Windows 10 to 11 migrations and Windows 10 ESU rollouts for legacy systems.</li>
+                        <li>Conduct digital forensics using Autopsy for incident response as part of the Security Incident Response Team.</li>
+                        <li>Serve as SME for all production IT issues and automate onboarding/off-boarding processes.</li>
+                    </ul>
+                </div>
 
-            <div class="timeline-item">
-                <h3>IT Infrastructure Intern</h3>
-                <span>Amsoil Inc. | May 2024 - Aug 2024</span>
-                <p>• Collaborated on Windows 11 migrations and Windows Server upgrades.</p>
-                <p>• Contributed to IT security policy updates, change control documentation, incident response framework, and disaster recovery planning.</p>
-            </div>
+                <div class="timeline-item">
+                    <div class="job-header">
+                        <h3>Field Service Technician</h3>
+                        <span class="date">Sept 2024 – Apr 2025</span>
+                    </div>
+                    <p class="org">[REDACTED]</p>
+                    <ul>
+                        <li>Provided IT support for the Emergency Department during EPIC Go-Live, ensuring uninterrupted clinical operations.</li>
+                        <li>Deployed and tracked over 5,000 devices for asset management and audit records.</li>
+                        <li>Coordinated a secure radiology network migration for PACS systems with minimal downtime.</li>
+                    </ul>
+                </div>
 
-            <div class="timeline-item">
-                <h3>Other Work Experience</h3>
-                <span>[Job Title] | [Dates]</span>
-                <p>[Placeholder for non-IT work experience.]</p>
-            </div>
+                <div class="timeline-item">
+                    <div class="job-header">
+                        <h3>IT Infrastructure Intern</h3>
+                        <span class="date">May 2024 – Aug 2024</span>
+                    </div>
+                    <p class="org">[REDACTED]</p>
+                    <ul>
+                        <li>Collaborated on Windows 11 migrations and Windows Server upgrades across the enterprise environment.</li>
+                        <li>Contributed to IT security policy updates, change control documentation, incident response framework, and disaster recovery planning.</li>
+                    </ul>
+                </div>
 
-            <div class="timeline-item">
-                <h3>Volunteer Experience</h3>
-                <span>[Volunteer Role] | [Organization] | [Dates]</span>
-                <p>[Placeholder for volunteer work from the past five years.]</p>
             </div>
         </section>
 
+        <!-- OTHER WORK EXPERIENCE -->
+        <section id="other-experience">
+            <h2 class="section-title">Other Work Experience</h2>
+            <div class="timeline">
+
+                <!-- Replace with your actual non-IT work history -->
+                <div class="timeline-item placeholder">
+                    <div class="job-header">
+                        <h3>[Job Title]</h3>
+                        <span class="date">[Start] – [End]</span>
+                    </div>
+                    <p class="org">[Employer] &nbsp;·&nbsp; [Location]</p>
+                    <ul>
+                        <li>[Key responsibility or achievement]</li>
+                        <li>[Another bullet point about your role]</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item placeholder">
+                    <div class="job-header">
+                        <h3>[Job Title]</h3>
+                        <span class="date">[Start] – [End]</span>
+                    </div>
+                    <p class="org">[Employer] &nbsp;·&nbsp; [Location]</p>
+                    <ul>
+                        <li>[Key responsibility or achievement]</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VOLUNTEER EXPERIENCE -->
+        <section id="volunteer">
+            <h2 class="section-title">Volunteer Experience</h2>
+            <p style="color: var(--text-muted); margin-bottom: 28px; font-size: 0.9rem;">Volunteer activities from the past five years.</p>
+            <div class="timeline">
+
+                <!-- Replace with your actual volunteer experience -->
+                <div class="timeline-item placeholder">
+                    <div class="job-header">
+                        <h3>[Volunteer Role]</h3>
+                        <span class="date">[Start] – [End]</span>
+                    </div>
+                    <p class="org">[Organization] &nbsp;·&nbsp; [Location]</p>
+                    <ul>
+                        <li>[What you did and what impact it had]</li>
+                        <li>[Skills used or developed]</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item placeholder">
+                    <div class="job-header">
+                        <h3>[Volunteer Role]</h3>
+                        <span class="date">[Start] – [End]</span>
+                    </div>
+                    <p class="org">[Organization] &nbsp;·&nbsp; [Location]</p>
+                    <ul>
+                        <li>[What you did and what impact it had]</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL DOCUMENTS -->
         <section id="documents">
             <h2 class="section-title">Professional Documents</h2>
             <div class="grid">
-                <div class="card" style="text-align: center;">
+                <div class="doc-card">
+                    <div class="doc-icon">📄</div>
                     <h3>Resume</h3>
-                    <p style="margin-bottom: 20px;">Updated with feedback from career services and faculty.</p>
+                    <p>Updated resume incorporating feedback from career services, classmates, and instructor.</p>
                     <a href="resume.pdf" target="_blank" class="btn">View PDF</a>
                 </div>
-                <div class="card" style="text-align: center;">
+                <div class="doc-card">
+                    <div class="doc-icon">✉️</div>
                     <h3>Cover Letter</h3>
-                    <p style="margin-bottom: 20px;">Professional cover letter tailored for industry roles.</p>
+                    <p>Professional cover letter tailored for network administration and cybersecurity roles.</p>
                     <a href="cover-letter.pdf" target="_blank" class="btn">View PDF</a>
                 </div>
             </div>
         </section>
 
     </div>
+
+    <footer>
+        <p>Thomas Brett Labouchere &nbsp;·&nbsp; Network Administration &amp; Cybersecurity &nbsp;·&nbsp; Lake Superior College</p>
+    </footer>
 
 </body>
 </html>
