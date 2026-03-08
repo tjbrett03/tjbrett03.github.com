@@ -75,6 +75,10 @@
             border-bottom: none;
         }
 
+        #education, #projects, #capstone, #it-experience {
+            border-bottom: none;
+        }
+
         h2.section-title {
             font-size: 1.9rem;
             margin-bottom: 40px;
@@ -105,11 +109,18 @@
         #hero {
             min-height: 80vh;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
             padding: 100px 0;
-            gap: 40px;
             border-bottom: 1px solid var(--border);
+        }
+
+        .hero-name-row {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 28px;
         }
 
         .hero-text h1 {
@@ -126,10 +137,10 @@
             font-size: 1.1rem;
             color: var(--accent);
             font-weight: 500;
-            margin-bottom: 16px;
+            margin-bottom: 0;
         }
 
-        .hero-text p {
+        .hero-body {
             font-size: 1.05rem;
             color: var(--text-muted);
             margin-bottom: 30px;
@@ -144,6 +155,7 @@
             object-fit: cover;
             flex-shrink: 0;
             box-shadow: 0 0 40px rgba(56, 189, 248, 0.2);
+            margin-top: 30px;
         }
 
         .btn {
@@ -473,14 +485,18 @@
         /* Responsive */
         @media (max-width: 768px) {
             #hero {
-                flex-direction: column-reverse;
+                align-items: center;
                 text-align: center;
-                gap: 36px;
                 padding: 70px 0;
                 min-height: unset;
             }
 
-            .hero-text p { margin: 0 auto 28px auto; }
+            .hero-name-row {
+                flex-direction: column-reverse;
+                gap: 28px;
+            }
+
+            .hero-body { margin: 0 auto 28px auto; }
             .btn-outline { margin-left: 0; margin-top: 12px; display: inline-block; }
             .hero-text h1 { font-size: 2.4rem; }
             .tags { justify-content: center; }
@@ -499,8 +515,6 @@
         <a href="#projects">Projects</a>
         <a href="#capstone">Capstone</a>
         <a href="#it-experience">IT Experience</a>
-        <a href="#other-experience">Other Experience</a>
-        <a href="#volunteer">Volunteer</a>
         <a href="#documents">Documents</a>
     </nav>
 
@@ -508,27 +522,29 @@
 
         <!-- HERO / ABOUT -->
         <header id="about">
-            <div class="hero-text">
-                <p class="section-label">Portfolio</p>
-                <h1>Thomas Brett<br><span>Labouchere</span></h1>
-                <p class="hero-subtitle">Network Administration &amp; Cybersecurity</p>
-                <p>AAS candidate at Lake Superior College focused on network architecture, server administration, and cybersecurity. Experienced in enterprise IT environments — from EMR deployments in healthcare to MDM and incident response in manufacturing.</p>
-                <div class="tags">
-                    <span class="tag">Networking</span>
-                    <span class="tag">Cybersecurity</span>
-                    <span class="tag">Windows Server</span>
-                    <span class="tag">Microsoft Intune</span>
-                    <span class="tag">JAMF</span>
-                    <span class="tag">Digital Forensics</span>
-                    <span class="tag">Cisco</span>
-                    <span class="tag">Linux</span>
+            <div class="hero-name-row">
+                <div class="hero-text">
+                    <p class="section-label">Portfolio</p>
+                    <h1>Thomas Brett<br><span>Labouchere</span></h1>
+                    <p class="hero-subtitle">Network Administration &amp; Cybersecurity</p>
                 </div>
-                <div style="margin-top: 30px;">
-                    <a href="#projects" class="btn">View My Work</a>
-                    <a href="resume.pdf" target="_blank" class="btn btn-outline">Download Resume</a>
-                </div>
+                <img src="photo.jpg" alt="Thomas Brett Labouchere" class="hero-img">
             </div>
-            <img src="photo.jpg" alt="Thomas Brett Labouchere" class="hero-img">
+            <p class="hero-body">Student at Lake Superior College focused on network architecture, server administration, and cybersecurity. Experienced in enterprise IT environments — from EMR deployments in healthcare to MDM and incident response in manufacturing.</p>
+            <div class="tags">
+                <span class="tag">Networking</span>
+                <span class="tag">Cybersecurity</span>
+                <span class="tag">Windows Server</span>
+                <span class="tag">Microsoft Intune</span>
+                <span class="tag">JAMF</span>
+                <span class="tag">Digital Forensics</span>
+                <span class="tag">Cisco</span>
+                <span class="tag">Linux</span>
+            </div>
+            <div style="margin-top: 30px;">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="resume.pdf" target="_blank" class="btn btn-outline">Download Resume</a>
+            </div>
         </header>
 
         <!-- EDUCATION -->
@@ -602,25 +618,20 @@
             <h2 class="section-title">Projects &amp; Passion</h2>
             <div class="grid">
                 <!-- Replace placeholders below with your actual projects -->
-                <div class="card placeholder">
-                    <span class="card-tag">Personal Project</span>
-                    <h3>[Project Name]</h3>
-                    <p>[Describe a personal or outside-of-class project that shows your passion for IT or cybersecurity. What problem did you solve? What tools did you use?]</p>
-                </div>
-                <div class="card placeholder">
-                    <span class="card-tag">Personal Project</span>
-                    <h3>[Project Name]</h3>
-                    <p>[Describe another personal project. Examples: home lab, CTF competition, open-source contribution, self-hosted service, or security research.]</p>
+                <div class="card">
+                    <span class="card-tag">Class Project</span>
+                    <h3>AI Financial Assistant</h3>
+                    <p>A desktop finance tracking application that uses GPT-3.5 to analyze personal expense data. Users upload a CSV file of transactions and receive an AI-generated financial summary, then continue asking follow-up questions through a built-in chatbot. The chatbot maintains full conversation context, including awareness of the uploaded CSV, for grounded, data-specific responses.</p>
                 </div>
                 <div class="card">
                     <span class="card-tag">Class Project</span>
                     <h3>This Portfolio Website</h3>
-                    <p>Designed and built a fully responsive personal portfolio from scratch using HTML and CSS — no frameworks. Hosted on GitHub Pages with a custom domain via CNAME.</p>
+                    <p>Designed and built a fully responsive personal portfolio from scratch using HTML and CSS. Hosted on GitHub Pages with a custom domain name. Built using claude code.</p>
                 </div>
-                <div class="card placeholder">
-                    <span class="card-tag">Class Project</span>
-                    <h3>[Class Project Name]</h3>
-                    <p>[Describe a notable lab or project from your coursework — e.g., a network simulation in Packet Tracer, a security audit, a server build, or a CTF challenge.]</p>
+                <div class="card">
+                    <span class="card-tag">Personal Project</span>
+                    <h3>Homelab</h3>
+                    <p>Architected a Proxmox-based virtualization environment for rapid provisioning and infrastructure testing. Implemented VLAN segmentation on a Cisco switch, with OPNsense and Suricata delivering firewall policy enforcement, IDS/IPS monitoring, and deep packet inspection for improved network visibility.</p>
                 </div>
             </div>
         </section>
@@ -772,71 +783,6 @@
                     <ul>
                         <li>Collaborated on Windows 11 migrations and Windows Server upgrades across the enterprise environment.</li>
                         <li>Contributed to IT security policy updates, change control documentation, incident response framework, and disaster recovery planning.</li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- OTHER WORK EXPERIENCE -->
-        <section id="other-experience">
-            <h2 class="section-title">Other Work Experience</h2>
-            <div class="timeline">
-
-                <!-- Replace with your actual non-IT work history -->
-                <div class="timeline-item placeholder">
-                    <div class="job-header">
-                        <h3>[Job Title]</h3>
-                        <span class="date">[Start] – [End]</span>
-                    </div>
-                    <p class="org">[Employer] &nbsp;·&nbsp; [Location]</p>
-                    <ul>
-                        <li>[Key responsibility or achievement]</li>
-                        <li>[Another bullet point about your role]</li>
-                    </ul>
-                </div>
-
-                <div class="timeline-item placeholder">
-                    <div class="job-header">
-                        <h3>[Job Title]</h3>
-                        <span class="date">[Start] – [End]</span>
-                    </div>
-                    <p class="org">[Employer] &nbsp;·&nbsp; [Location]</p>
-                    <ul>
-                        <li>[Key responsibility or achievement]</li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- VOLUNTEER EXPERIENCE -->
-        <section id="volunteer">
-            <h2 class="section-title">Volunteer Experience</h2>
-            <p style="color: var(--text-muted); margin-bottom: 28px; font-size: 0.9rem;">Volunteer activities from the past five years.</p>
-            <div class="timeline">
-
-                <!-- Replace with your actual volunteer experience -->
-                <div class="timeline-item placeholder">
-                    <div class="job-header">
-                        <h3>[Volunteer Role]</h3>
-                        <span class="date">[Start] – [End]</span>
-                    </div>
-                    <p class="org">[Organization] &nbsp;·&nbsp; [Location]</p>
-                    <ul>
-                        <li>[What you did and what impact it had]</li>
-                        <li>[Skills used or developed]</li>
-                    </ul>
-                </div>
-
-                <div class="timeline-item placeholder">
-                    <div class="job-header">
-                        <h3>[Volunteer Role]</h3>
-                        <span class="date">[Start] – [End]</span>
-                    </div>
-                    <p class="org">[Organization] &nbsp;·&nbsp; [Location]</p>
-                    <ul>
-                        <li>[What you did and what impact it had]</li>
                     </ul>
                 </div>
 
