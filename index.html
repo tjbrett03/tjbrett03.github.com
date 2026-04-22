@@ -67,7 +67,7 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 40px 0;
             border-bottom: 1px solid var(--border);
         }
 
@@ -483,27 +483,139 @@
         }
 
         /* Responsive */
+        /* Carousel */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 22px;
+        }
+
+        .carousel-track .card {
+            flex: 0 0 calc((100% - 44px) / 3);
+            min-width: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .carousel-btn {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(56,189,248,0.1);
+            border-color: var(--accent);
+        }
+
+        .carousel-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--border);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background-color 0.2s;
+        }
+
+        .carousel-dot.active {
+            background-color: var(--accent);
+        }
+
         @media (max-width: 768px) {
+            /* Hero */
             #hero {
                 align-items: center;
                 text-align: center;
-                padding: 70px 0;
+                padding: 50px 0;
                 min-height: unset;
             }
 
             .hero-name-row {
                 flex-direction: column-reverse;
-                gap: 28px;
+                align-items: center;
+                gap: 24px;
             }
 
-            .hero-body { margin: 0 auto 28px auto; }
-            .btn-outline { margin-left: 0; margin-top: 12px; display: inline-block; }
-            .hero-text h1 { font-size: 2.4rem; }
+            .hero-img {
+                width: 180px;
+                height: 180px;
+                margin-top: 0;
+            }
+
+            .hero-text h1 { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-body { margin: 16px auto 24px auto; font-size: 0.95rem; }
             .tags { justify-content: center; }
-            .degree-block { flex-direction: column; }
+
+            /* Stack buttons vertically */
+            #about > div[style] { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+            .btn-outline { margin-left: 0; }
+
+            /* Section titles */
+            h2.section-title { font-size: 1.5rem; margin-bottom: 24px; }
+
+            /* Education */
+            .degree-block { flex-direction: column; padding: 20px; }
             .degree-block .gpa { text-align: left; }
+
+            /* Carousel */
+            .carousel-track .card { flex: 0 0 100%; }
+
+            /* Projects grid — single column */
+            .grid { grid-template-columns: 1fr; }
+
+            /* Capstone */
             .capstone-grid { grid-template-columns: 1fr; }
-            .timeline-item .job-header { flex-direction: column; }
+
+            /* Make milestone table scroll horizontally */
+            .capstone-block:has(.milestone-table) {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .milestone-table { min-width: 520px; font-size: 0.8rem; }
+            .milestone-table th, .milestone-table td { padding: 6px 8px; }
+
+            /* Timeline */
+            .timeline-item { padding: 18px; }
+            .timeline-item .job-header { flex-direction: column; gap: 4px; }
+            .timeline-item h3 { font-size: 1rem; }
+
+            /* Nav — tighter on small screens */
+            nav { gap: 8px 16px; padding: 12px 16px; }
+            nav a { font-size: 0.72rem; }
         }
     </style>
 </head>
@@ -564,51 +676,58 @@
             </div>
 
             <p class="section-label">Completed Coursework</p>
-            <div class="grid" style="margin-top: 14px;">
-                <div class="card">
-                    <span class="card-tag">Security</span>
-                    <h3>Network Security (CIS 2812)</h3>
-                    <p>Fundamentals of safeguarding network infrastructure — threat modeling, firewall configuration, VPN setup, and defense-in-depth strategies.</p>
+            <div class="carousel" style="margin-top: 14px;">
+                <div class="carousel-track">
+                    <div class="card">
+                        <span class="card-tag">Security</span>
+                        <h3>Network Security (CIS 2812)</h3>
+                        <p>Fundamentals of safeguarding network infrastructure — threat modeling, firewall configuration, VPN setup, and defense-in-depth strategies.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Security</span>
+                        <h3>Ethical Hacking (CIS 2814)</h3>
+                        <p>Penetration testing methodologies using industry tools. Performed vulnerability scanning, exploitation, and post-exploitation analysis in lab environments.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Networking</span>
+                        <h3>CISCO Networking I &amp; II</h3>
+                        <p>Installation, configuration, and troubleshooting of Cisco routers and switches. Covers OSI model, subnetting, VLANs, STP, and routing protocols.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Server Admin</span>
+                        <h3>Windows Server Administration</h3>
+                        <p>Practical server administration including Active Directory, Group Policy, DNS/DHCP, file services, and enterprise network configuration.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Security</span>
+                        <h3>Forensics &amp; Incident Response</h3>
+                        <p>Digital evidence collection, chain of custody, forensic imaging, and structured incident response procedures using industry-standard tools.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Security</span>
+                        <h3>Intrusion Detection</h3>
+                        <p>Development of secure IT strategy, IDS/IPS deployment, log analysis, and identification of network-based attack patterns and anomalies.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Systems</span>
+                        <h3>Linux/Unix Administration</h3>
+                        <p>Command-line administration, shell scripting, user/permission management, and service configuration on Linux-based systems.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Hardware</span>
+                        <h3>PC Hardware &amp; Support (A+ Prep)</h3>
+                        <p>Hands-on hardware diagnostics, component installation, OS deployment, and troubleshooting aligned with CompTIA A+ objectives.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-tag">Web</span>
+                        <h3>Web Programming</h3>
+                        <p>Fundamentals of HTML, CSS, and client-side development. Includes design principles and hosting — as demonstrated by this portfolio.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <span class="card-tag">Security</span>
-                    <h3>Ethical Hacking (CIS 2814)</h3>
-                    <p>Penetration testing methodologies using industry tools. Performed vulnerability scanning, exploitation, and post-exploitation analysis in lab environments.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Networking</span>
-                    <h3>CISCO Networking I &amp; II</h3>
-                    <p>Installation, configuration, and troubleshooting of Cisco routers and switches. Covers OSI model, subnetting, VLANs, STP, and routing protocols.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Server Admin</span>
-                    <h3>Windows Server Administration</h3>
-                    <p>Practical server administration including Active Directory, Group Policy, DNS/DHCP, file services, and enterprise network configuration.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Security</span>
-                    <h3>Forensics &amp; Incident Response</h3>
-                    <p>Digital evidence collection, chain of custody, forensic imaging, and structured incident response procedures using industry-standard tools.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Security</span>
-                    <h3>Intrusion Detection</h3>
-                    <p>Development of secure IT strategy, IDS/IPS deployment, log analysis, and identification of network-based attack patterns and anomalies.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Systems</span>
-                    <h3>Linux/Unix Administration</h3>
-                    <p>Command-line administration, shell scripting, user/permission management, and service configuration on Linux-based systems.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Hardware</span>
-                    <h3>PC Hardware &amp; Support (A+ Prep)</h3>
-                    <p>Hands-on hardware diagnostics, component installation, OS deployment, and troubleshooting aligned with CompTIA A+ objectives.</p>
-                </div>
-                <div class="card">
-                    <span class="card-tag">Web</span>
-                    <h3>Web Programming</h3>
-                    <p>Fundamentals of HTML, CSS, and client-side development. Includes design principles and hosting — as demonstrated by this portfolio.</p>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="course-prev" aria-label="Previous">&#8592;</button>
+                    <div class="carousel-dots" id="course-dots"></div>
+                    <button class="carousel-btn" id="course-next" aria-label="Next">&#8594;</button>
                 </div>
             </div>
         </section>
@@ -643,13 +762,13 @@
             <div class="card" style="margin-bottom: 22px;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
                     <div>
-                        <span class="card-tag">Capstone — First Draft</span>
-                        <h3 style="margin-top: 6px;">[Capstone Project Title]</h3>
+                        <span class="card-tag">CIS Capstone</span>
+                        <h3 style="margin-top: 6px;">Nonprofit Storytelling Tool</h3>
                     </div>
                     <span class="status-badge status-draft">Draft / Planning</span>
                 </div>
                 <p style="margin-top: 14px; color: var(--text-muted);">
-                    [Write a 2–3 sentence overview of your capstone project here. What is the problem you are solving? Who is the end user or client? What is the expected outcome or deliverable?]
+                    An AI-powered storytelling tool built for Viva Technology that helps nonprofit staff turn real-world experiences into polished written content. A local Llama 3.1 8B model conducts a guided interview to extract key story elements, which are anonymized and passed to the Claude API to generate audience-ready narratives for grant reports, donor appeals, social posts, and more. The hybrid architecture keeps sensitive staff and client data on-device while leveraging a more capable external model for the final writing output.
                 </p>
             </div>
 
@@ -657,9 +776,9 @@
                 <div class="capstone-block">
                     <h4>Project Objectives</h4>
                     <ul>
-                        <li>[Primary goal of the project]</li>
-                        <li>[Secondary objective]</li>
-                        <li>[Measurable success criterion]</li>
+                        <li>Build a functional two-model AI pipeline where a local LLM conducts structured interviews and the Claude API generates polished, audience-ready narratives</li>
+                        <li>Deliver a deployable Flask web application with Docker Compose support, accessible to stakeholders via ngrok</li>
+                        <li>Successfully generate coherent, goal- and audience-matched narratives from at least five real test stories with no PII leakage between the interview and API layers</li>
                     </ul>
                 </div>
 
@@ -667,12 +786,20 @@
                     <h4>Scope</h4>
                     <p><strong style="color: var(--text-main);">In Scope:</strong></p>
                     <ul style="margin-top: 6px; margin-bottom: 10px;">
-                        <li>[What is included in this project]</li>
-                        <li>[Specific deliverable or system]</li>
+                        <li>Local LLM interview pipeline (Llama 3.1 8B via Ollama)</li>
+                        <li>Claude API narrative generation layer</li>
+                        <li>Goal and audience selection UI</li>
+                        <li>Flask web application with Docker Compose</li>
+                        <li>PII detection and readability scoring</li>
+                        <li>Stakeholder demo access via ngrok</li>
                     </ul>
                     <p><strong style="color: var(--text-main);">Out of Scope:</strong></p>
                     <ul style="margin-top: 6px;">
-                        <li>[What will NOT be addressed]</li>
+                        <li>User authentication or saved accounts</li>
+                        <li>Persistent narrative storage/database</li>
+                        <li>Multi-language support</li>
+                        <li>Mobile interface</li>
+                        <li>Production cloud hosting</li>
                     </ul>
                 </div>
 
@@ -728,24 +855,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-
-                <div class="capstone-block">
-                    <h4>Resources &amp; Tools</h4>
-                    <ul>
-                        <li>[Hardware or infrastructure needed]</li>
-                        <li>[Software / platforms / licenses]</li>
-                        <li>[Advisor or stakeholder support]</li>
-                    </ul>
-                </div>
-
-                <div class="capstone-block">
-                    <h4>Risk Assessment</h4>
-                    <ul>
-                        <li>[Risk 1: e.g., scope creep — mitigation strategy]</li>
-                        <li>[Risk 2: e.g., hardware availability — mitigation strategy]</li>
-                        <li>[Risk 3: e.g., time constraints — mitigation strategy]</li>
-                    </ul>
                 </div>
             </div>
         </section>
@@ -822,5 +931,64 @@
         <p>Thomas Brett Labouchere &nbsp;·&nbsp; Network Administration &amp; Cybersecurity &nbsp;·&nbsp; Lake Superior College</p>
     </footer>
 
+
+<script>
+    (function () {
+        const track = document.querySelector('.carousel-track');
+        const cards = Array.from(track.querySelectorAll('.card'));
+        const prevBtn = document.getElementById('course-prev');
+        const nextBtn = document.getElementById('course-next');
+        const dotsContainer = document.getElementById('course-dots');
+
+        function visibleCount() {
+            return window.innerWidth <= 768 ? 1 : 3;
+        }
+
+        let current = 0;
+
+        function pageCount() {
+            return Math.ceil(cards.length / visibleCount());
+        }
+
+        function buildDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < pageCount(); i++) {
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (i === current ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to page ' + (i + 1));
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function goTo(page) {
+            current = Math.max(0, Math.min(page, pageCount() - 1));
+            const n = visibleCount();
+            const gapPx = 22;
+            const cardWidth = (track.offsetWidth - gapPx * (n - 1)) / n;
+            const offset = current * n * (cardWidth + gapPx);
+            track.style.transform = 'translateX(-' + offset + 'px)';
+            prevBtn.disabled = current === 0;
+            nextBtn.disabled = current >= pageCount() - 1;
+            dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === current);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => goTo(current - 1));
+        nextBtn.addEventListener('click', () => goTo(current + 1));
+
+        track.style.transition = 'transform 0.4s ease';
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => { buildDots(); goTo(0); }, 150);
+        });
+
+        buildDots();
+        goTo(0);
+    })();
+</script>
 </body>
 </html>
