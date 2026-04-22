@@ -437,9 +437,9 @@
             font-weight: 600;
         }
 
-        .status-draft { background: rgba(251,191,36,0.15); color: #fbbf24; }
-        .status-planning { background: rgba(56,189,248,0.15); color: #38bdf8; }
-        .status-pending { background: rgba(148,163,184,0.15); color: #94a3b8; }
+        .status-in_progress { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .status-upcoming { background: rgba(148,163,184,0.15); color: #94a3b8; }
+        .status-complete { background: rgba(34,197,94,0.15); color: #22c55e; }
 
         /* Documents */
         .doc-card {
@@ -689,34 +689,42 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1 — Initiation</td>
-                                <td>Project proposal approved, scope defined</td>
-                                <td>[Month, Year]</td>
-                                <td><span class="status-badge status-draft">In Progress</span></td>
+                                <td>Week 1 - Foundation</td>
+                                <td>Local LLM running + web app skeleton</td>
+                                <td>03/22/2026</td>
+                                <td><span class="status-badge status-complete">Complete</span></td>
                             </tr>
                             <tr>
-                                <td>2 — Planning</td>
-                                <td>Requirements gathered, tools selected, timeline set</td>
-                                <td>[Month, Year]</td>
-                                <td><span class="status-badge status-planning">Upcoming</span></td>
+                                <td>Week 2 - Interview Pipeline</td>
+                                <td>Multi-turn conversation loop + structured JSON output working</td>
+                                <td>03/29/2026</td>
+                                <td><span class="status-badge status-complete">Complete</span></td>
                             </tr>
                             <tr>
-                                <td>3 — Execution</td>
-                                <td>[Key implementation milestone]</td>
-                                <td>[Month, Year]</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Week 3 - Refine Interview Process</td>
+                                <td>Extraction loop tested against real stories</td>
+                                <td>04/05/2026</td>
+                                <td><span class="status-badge status-complete">Complete</span></td>
                             </tr>
                             <tr>
-                                <td>4 — Testing</td>
-                                <td>Testing, troubleshooting, and validation complete</td>
-                                <td>[Month, Year]</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Week 4 - Claude API Integration </td>
+                                <td>Claude API connected + draft quality reviewed</td>
+                                <td>04/12/2026</td>
+                                <td><span class="status-badge status-complete">Complete</span></td>
                             </tr>
                             <tr>
-                                <td>5 — Closeout</td>
-                                <td>Final presentation and documentation delivered</td>
-                                <td>Spring 2026</td>
-                                <td><span class="status-badge status-pending">Pending</span></td>
+                                <td>Week 5 Quality Check & Output</td>
+                                <td>PII detection, readability score, and clean output screen complete</td>
+                                <td>04/19/2026</td>
+                                <td><span class="status-badge status-in_progress">In Progress</span></td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Week 6 - Final Testing and Documentation</td>
+                                <td>Full pipeline tested, results documented, professor presentation ready</td>
+                                <td>04/26/2026</td>
+                                <td><span class="status-badge status-upcoming">Upcoming</span></td>
+                                
                             </tr>
                         </tbody>
                     </table>
