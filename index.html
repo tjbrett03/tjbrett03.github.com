@@ -39,10 +39,15 @@
             padding: 16px 20px;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px 24px;
+            align-items: center;
             z-index: 1000;
             border-bottom: 1px solid var(--border);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
         }
 
         nav a {
@@ -58,6 +63,59 @@
         nav a:hover {
             color: var(--accent);
         }
+
+        /* Hamburger button */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: var(--text-muted);
+            border-radius: 2px;
+            transition: background-color 0.2s;
+        }
+
+        .hamburger:hover span { background-color: var(--accent); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgba(15, 23, 42, 0.98);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            gap: 0;
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--accent); }
 
         /* Layout */
         .container {
@@ -75,7 +133,7 @@
             border-bottom: none;
         }
 
-        #education, #projects, #capstone, #it-experience {
+        #education, #projects, #capstone, #it-experience, #activities, #certifications, #skills, #contact {
             border-bottom: none;
         }
 
@@ -441,6 +499,21 @@
         .status-upcoming { background: rgba(148,163,184,0.15); color: #94a3b8; }
         .status-complete { background: rgba(34,197,94,0.15); color: #22c55e; }
 
+        .report-btn {
+            display: inline-block;
+            padding: 3px 10px;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .report-btn:hover { background-color: rgba(56,189,248,0.1); }
+
         /* Documents */
         .doc-card {
             background-color: var(--surface-color);
@@ -605,7 +678,7 @@
                 -webkit-overflow-scrolling: touch;
             }
 
-            .milestone-table { min-width: 520px; font-size: 0.8rem; }
+            .milestone-table { min-width: 640px; font-size: 0.8rem; }
             .milestone-table th, .milestone-table td { padding: 6px 8px; }
 
             /* Timeline */
@@ -613,21 +686,41 @@
             .timeline-item .job-header { flex-direction: column; gap: 4px; }
             .timeline-item h3 { font-size: 1rem; }
 
-            /* Nav — tighter on small screens */
-            nav { gap: 8px 16px; padding: 12px 16px; }
-            nav a { font-size: 0.72rem; }
+            /* Nav — hamburger on mobile */
+            nav { justify-content: space-between; padding: 14px 20px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#capstone">Capstone</a>
-        <a href="#it-experience">IT Experience</a>
-        <a href="#documents">Documents</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#capstone">Capstone</a>
+            <a href="#it-experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#capstone">Capstone</a>
+            <a href="#it-experience">IT Experience</a>
+            <a href="#activities">Activities</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+            <a href="#documents">Documents</a>
+        </div>
     </nav>
 
     <div class="container">
@@ -655,7 +748,8 @@
             </div>
             <div style="margin-top: 30px;">
                 <a href="#projects" class="btn">View My Work</a>
-                <a href="resume1.pdf" target="_blank" class="btn btn-outline">Download Resume</a>
+                <a href="files/resume1.pdf" target="_blank" class="btn btn-outline">Download Resume</a>
+                <a href="files/cover-letter.pdf" target="_blank" class="btn btn-outline">Download Cover Letter</a>
             </div>
         </header>
 
@@ -741,6 +835,7 @@
                     <span class="card-tag">Class Project</span>
                     <h3>AI Financial Assistant</h3>
                     <p>A desktop finance tracking application that uses GPT-3.5 to analyze personal expense data. Users upload a CSV file of transactions and receive an AI-generated financial summary, then continue asking follow-up questions through a built-in chatbot. The chatbot maintains full conversation context, including awareness of the uploaded CSV, for grounded, data-specific responses.</p>
+                    <a href="https://github.com/tjbrett03/AI-Financial-Assistant" target="_blank" class="report-btn" style="margin-top: 14px; display: inline-block;">View on GitHub</a>
                 </div>
                 <div class="card">
                     <span class="card-tag">Class Project</span>
@@ -765,11 +860,22 @@
                         <span class="card-tag">CIS Capstone</span>
                         <h3 style="margin-top: 6px;">Nonprofit Storytelling Tool</h3>
                     </div>
-                    <span class="status-badge status-draft">Draft / Planning</span>
+                    <span class="status-badge status-complete">Complete</span>
                 </div>
                 <p style="margin-top: 14px; color: var(--text-muted);">
                     An AI-powered storytelling tool built for Viva Technology that helps nonprofit staff turn real-world experiences into polished written content. A local Llama 3.1 8B model conducts a guided interview to extract key story elements, which are anonymized and passed to the Claude API to generate audience-ready narratives for grant reports, donor appeals, social posts, and more. The hybrid architecture keeps sensitive staff and client data on-device while leveraging a more capable external model for the final writing output.
                 </p>
+                <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="https://github.com/tjbrett03/CIS-Capstone" target="_blank" class="report-btn">View on GitHub</a>
+                    <a href="files/CIS2987_Final_Report.docx" class="btn" style="background-color: #22c55e; color: #0f172a; padding: 4px 14px; font-size: 0.82rem;">Download Final Report</a>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 22px;">
+                <p class="section-label">Demo Walkthrough</p>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); margin-top: 10px;">
+                    <iframe src="https://www.youtube.com/embed/fbtTXjZpRz0" title="Capstone Demo Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+                </div>
             </div>
 
             <div class="capstone-grid">
@@ -804,14 +910,20 @@
                 </div>
 
                 <div class="capstone-block" style="grid-column: 1 / -1;">
+                    <h4>Project Management</h4>
+                    <p style="margin-bottom: 10px;">Weekly progress was tracked and documented using <strong style="color: var(--text-main);">ClickUp</strong> as the project management platform. Each week's tasks, status updates, and time logs were recorded and used to produce the weekly progress reports linked in the timeline below.</p>
+                </div>
+
+                <div class="capstone-block" style="grid-column: 1 / -1;">
                     <h4>Project Timeline &amp; Milestones</h4>
                     <table class="milestone-table">
                         <thead>
                             <tr>
                                 <th>Phase</th>
                                 <th>Milestone</th>
-                                <th>Target Date</th>
+                                <th>Date Completed</th>
                                 <th>Status</th>
+                                <th>Report</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -820,42 +932,47 @@
                                 <td>Local LLM running + web app skeleton</td>
                                 <td>03/22/2026</td>
                                 <td><span class="status-badge status-complete">Complete</span></td>
+                                <td><a href="files/week1-report.docx" class="report-btn">Download Report</a></td>
                             </tr>
                             <tr>
                                 <td>Week 2 - Interview Pipeline</td>
                                 <td>Multi-turn conversation loop + structured JSON output working</td>
                                 <td>03/29/2026</td>
                                 <td><span class="status-badge status-complete">Complete</span></td>
+                                <td><a href="files/week2-report.docx" class="report-btn">Download Report</a></td>
                             </tr>
                             <tr>
                                 <td>Week 3 - Refine Interview Process</td>
                                 <td>Extraction loop tested against real stories</td>
                                 <td>04/05/2026</td>
                                 <td><span class="status-badge status-complete">Complete</span></td>
+                                <td><a href="files/week3-report.docx" class="report-btn">Download Report</a></td>
                             </tr>
                             <tr>
-                                <td>Week 4 - Claude API Integration </td>
+                                <td>Week 4 - Claude API Integration</td>
                                 <td>Claude API connected + draft quality reviewed</td>
                                 <td>04/12/2026</td>
                                 <td><span class="status-badge status-complete">Complete</span></td>
+                                <td><a href="files/week4-report.docx" class="report-btn">Download Report</a></td>
                             </tr>
                             <tr>
-                                <td>Week 5 Quality Check & Output</td>
+                                <td>Week 5 - Quality Check &amp; Output</td>
                                 <td>PII detection, readability score, and clean output screen complete</td>
                                 <td>04/19/2026</td>
-                                <td><span class="status-badge status-in_progress">In Progress</span></td>
-                                
+                                <td><span class="status-badge status-complete">Complete</span></td>
+                                <td><a href="files/week5-report.docx" class="report-btn">Download Report</a></td>
                             </tr>
                             <tr>
                                 <td>Week 6 - Final Testing and Documentation</td>
                                 <td>Full pipeline tested, results documented, professor presentation ready</td>
                                 <td>04/26/2026</td>
-                                <td><span class="status-badge status-upcoming">Upcoming</span></td>
-                                
+                                <td><span class="status-badge status-complete">Complete</span></td>
+                                <td><a href="files/CIS2987_Final_Report.docx" class="report-btn">Download Report</a></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
             </div>
         </section>
 
@@ -906,6 +1023,94 @@
             </div>
         </section>
 
+        <!-- ACTIVITIES & EVENTS -->
+        <section id="activities">
+            <h2 class="section-title">Activities &amp; Events</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-tag">Conference</span>
+                    <h3>Minneapolis Technology Summit</h3>
+                    <p>Attended the Minneapolis Technology Summit, engaging with industry professionals on emerging technology trends in IT and cybersecurity. Participated in a tabletop exercise led by a former CISA agent and SANS instructor, working through real-world incident response scenarios.</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Cybersecurity</span>
+                    <h3>Ransomware Tabletop Exercise</h3>
+                    <p>Participated in a ransomware incident response tabletop exercise through work as part of the Security Incident Response Team. Practiced real-world decision-making and coordinated response procedures under a simulated ransomware attack scenario.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section id="certifications">
+            <h2 class="section-title">Certifications</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-tag">MDM</span>
+                    <h3>Jamf 200 — Jamf Pro Fundamentals</h3>
+                    <p>Foundational certification covering Apple device management with Jamf Pro, including enrollment, configuration profiles, policies, and inventory management.</p>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Security</span>
+                    <h3>CompTIA Security+</h3>
+                    <p>Industry-standard cybersecurity certification covering threat analysis, network security, cryptography, identity management, and risk management. Currently in progress.</p>
+                    <span class="status-badge status-in_progress" style="margin-top: 12px; display: inline-block;">In Progress</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="card-tag">Hardware</span>
+                    <h3>Hardware</h3>
+                    <div class="tags" style="margin-top: 8px;">
+                        <span class="tag">Low Voltage Wiring</span>
+                        <span class="tag">Network Troubleshooting</span>
+                        <span class="tag">PC Hardware</span>
+                        <span class="tag">Server Hardware</span>
+                        
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Software & Tools</span>
+                    <h3>Software &amp; Tools</h3>
+                    <div class="tags" style="margin-top: 8px;">
+                        <span class="tag">Jamf</span>
+                        <span class="tag">Microsoft Intune</span>
+                        <span class="tag">CrowdStrike</span>
+                        <span class="tag">Windows Server</span>
+                        <span class="tag">Linux Server</span>
+                        <span class="tag">ESXi</span>
+                        <span class="tag">Proxmox</span>
+                        <span class="tag">PowerShell</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="card-tag">Soft Skills</span>
+                    <h3>Soft Skills</h3>
+                    <div class="tags" style="margin-top: 8px;">
+                        <span class="tag">Communication</span>
+                        <span class="tag">Collaboration</span>
+                        <span class="tag">Problem-Solving</span>
+                        <span class="tag">Adaptability</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <h2 class="section-title">Contact</h2>
+            <div class="card" style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <div>
+                    <p class="section-label">Email</p>
+                    <a href="mailto:thomas@tjbrett.com" style="color: var(--accent); font-size: 1.1rem; text-decoration: none; font-weight: 600;">thomas@tjbrett.com</a>
+                </div>
+            </div>
+        </section>
+
         <!-- PROFESSIONAL DOCUMENTS -->
         <section id="documents">
             <h2 class="section-title">Professional Documents</h2>
@@ -914,13 +1119,13 @@
                     <div class="doc-icon">📄</div>
                     <h3>Resume</h3>
                     <p>Updated resume incorporating feedback from career services, classmates, and instructor.</p>
-                    <a href="resume1.pdf" target="_blank" class="btn">View PDF</a>
+                    <a href="files/resume1.pdf" target="_blank" class="btn">View PDF</a>
                 </div>
                 <div class="doc-card">
                     <div class="doc-icon">✉️</div>
                     <h3>Cover Letter</h3>
                     <p>Professional cover letter tailored for network administration and cybersecurity roles.</p>
-                    <a href="cover-letter.pdf" target="_blank" class="btn">View PDF</a>
+                    <a href="files/cover-letter.pdf" target="_blank" class="btn">View PDF</a>
                 </div>
             </div>
         </section>
@@ -928,11 +1133,18 @@
     </div>
 
     <footer>
-        <p>Thomas Brett Labouchere &nbsp;·&nbsp; Network Administration &amp; Cybersecurity &nbsp;·&nbsp; Lake Superior College</p>
+        <p>Thomas Brett Labouchere &nbsp;·&nbsp; Network Administration &amp; Cybersecurity &nbsp;·&nbsp; Lake Superior College &nbsp;·&nbsp; <a href="mailto:thomas@tjbrett.com" style="color: var(--accent); text-decoration: none;">thomas@tjbrett.com</a></p>
     </footer>
 
 
 <script>
+    (function () {
+        const btn = document.getElementById('hamburger-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('open'));
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+    })();
+
     (function () {
         const track = document.querySelector('.carousel-track');
         const cards = Array.from(track.querySelectorAll('.card'));
