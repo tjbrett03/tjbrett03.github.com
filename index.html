@@ -24,6 +24,61 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        html { scroll-behavior: smooth; }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: var(--accent);
+            margin-left: 2px;
+            animation: blink 0.8s step-end infinite;
+            vertical-align: middle;
+            height: 1.1em;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Card tilt */
+        .card { transform-style: preserve-3d; will-change: transform; }
+
+        /* Scroll fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Active nav */
+        .nav-links a.active { color: var(--accent); }
+
+        /* Stats strip */
+        .stats-strip {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+            margin-bottom: 8px;
+        }
+        .stat-item { text-align: left; }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -686,6 +741,9 @@
             .timeline-item .job-header { flex-direction: column; gap: 4px; }
             .timeline-item h3 { font-size: 1rem; }
 
+            .stats-strip { justify-content: center; gap: 20px; }
+            .stat-item { text-align: center; }
+
             /* Nav — hamburger on mobile */
             nav { justify-content: space-between; padding: 14px 20px; }
             .nav-links { display: none; }
@@ -695,7 +753,9 @@
 </head>
 <body>
 
-    <nav>
+    <canvas id="particle-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+    <nav style="position:sticky;z-index:1000;">
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#education">Education</a>
@@ -723,7 +783,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container" style="position:relative;z-index:1;">
 
         <!-- HERO / ABOUT -->
         <header id="about">
@@ -731,7 +791,7 @@
                 <div class="hero-text">
                     <p class="section-label">Portfolio</p>
                     <h1>Thomas Brett<br><span>Labouchere</span></h1>
-                    <p class="hero-subtitle">Network Administration &amp; Cybersecurity</p>
+                    <p class="hero-subtitle" id="hero-subtitle"></p>
                 </div>
                 <img src="photo.jpg" alt="Thomas Brett Labouchere" class="hero-img">
             </div>
@@ -746,6 +806,12 @@
                 <span class="tag">Cisco</span>
                 <span class="tag">Linux</span>
             </div>
+            <div class="stats-strip">
+                <div class="stat-item"><div class="stat-number" data-target="5000" data-suffix="+">0</div><div class="stat-label">Devices Deployed</div></div>
+                <div class="stat-item"><div class="stat-number" data-target="3" data-suffix="">0</div><div class="stat-label">IT Roles</div></div>
+<div class="stat-item"><div class="stat-number" data-target="6" data-suffix=" Weeks">0</div><div class="stat-label">Capstone Duration</div></div>
+            </div>
+
             <div style="margin-top: 30px;">
                 <a href="#projects" class="btn">View My Work</a>
                 <a href="files/resume1.pdf" target="_blank" class="btn btn-outline">Download Resume</a>
@@ -754,7 +820,7 @@
         </header>
 
         <!-- EDUCATION -->
-        <section id="education">
+        <section id="education" class="fade-in">
             <h2 class="section-title">Education &amp; Coursework</h2>
 
             <div class="degree-block">
@@ -827,7 +893,7 @@
         </section>
 
         <!-- PROJECTS -->
-        <section id="projects">
+        <section id="projects" class="fade-in">
             <h2 class="section-title">Projects &amp; Passion</h2>
             <div class="grid">
                 <!-- Replace placeholders below with your actual projects -->
@@ -851,7 +917,7 @@
         </section>
 
         <!-- CAPSTONE -->
-        <section id="capstone">
+        <section id="capstone" class="fade-in">
             <h2 class="section-title">Capstone Project</h2>
 
             <div class="card" style="margin-bottom: 22px;">
@@ -977,7 +1043,7 @@
         </section>
 
         <!-- IT WORK EXPERIENCE -->
-        <section id="it-experience">
+        <section id="it-experience" class="fade-in">
             <h2 class="section-title">IT Work Experience</h2>
             <div class="timeline">
 
@@ -1024,7 +1090,7 @@
         </section>
 
         <!-- ACTIVITIES & EVENTS -->
-        <section id="activities">
+        <section id="activities" class="fade-in">
             <h2 class="section-title">Activities &amp; Events</h2>
             <div class="grid">
                 <div class="card">
@@ -1041,7 +1107,7 @@
         </section>
 
         <!-- CERTIFICATIONS -->
-        <section id="certifications">
+        <section id="certifications" class="fade-in">
             <h2 class="section-title">Certifications</h2>
             <div class="grid">
                 <div class="card">
@@ -1059,7 +1125,7 @@
         </section>
 
         <!-- SKILLS -->
-        <section id="skills">
+        <section id="skills" class="fade-in">
             <h2 class="section-title">Technical Skills</h2>
             <div class="grid">
                 <div class="card">
@@ -1101,7 +1167,7 @@
         </section>
 
         <!-- CONTACT -->
-        <section id="contact">
+        <section id="contact" class="fade-in">
             <h2 class="section-title">Contact</h2>
             <div class="card" style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
                 <div>
@@ -1112,7 +1178,7 @@
         </section>
 
         <!-- PROFESSIONAL DOCUMENTS -->
-        <section id="documents">
+        <section id="documents" class="fade-in">
             <h2 class="section-title">Professional Documents</h2>
             <div class="grid">
                 <div class="doc-card">
@@ -1132,12 +1198,151 @@
 
     </div>
 
-    <footer>
+    <footer style="position:relative;z-index:1;">
         <p>Thomas Brett Labouchere &nbsp;·&nbsp; Network Administration &amp; Cybersecurity &nbsp;·&nbsp; Lake Superior College &nbsp;·&nbsp; <a href="mailto:thomas@tjbrett.com" style="color: var(--accent); text-decoration: none;">thomas@tjbrett.com</a></p>
     </footer>
 
 
 <script>
+    (function () {
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles;
+        const COUNT = 60;
+        const MAX_DIST = 140;
+        const COLOR = '56,189,248';
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+
+        function rand(min, max) { return Math.random() * (max - min) + min; }
+
+        function init() {
+            particles = Array.from({ length: COUNT }, () => ({
+                x: rand(0, W), y: rand(0, H),
+                vx: rand(-0.3, 0.3), vy: rand(-0.3, 0.3),
+                r: rand(1.5, 2.5)
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            for (let i = 0; i < COUNT; i++) {
+                const p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < 0 || p.x > W) p.vx *= -1;
+                if (p.y < 0 || p.y > H) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${COLOR},0.5)`;
+                ctx.fill();
+
+                for (let j = i + 1; j < COUNT; j++) {
+                    const q = particles[j];
+                    const dx = p.x - q.x, dy = p.y - q.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < MAX_DIST) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(q.x, q.y);
+                        ctx.strokeStyle = `rgba(${COLOR},${0.15 * (1 - dist / MAX_DIST)})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize(); init(); draw();
+    })();
+
+    // Typing animation
+    (function () {
+        const el = document.getElementById('hero-subtitle');
+        const text = 'Network Administration & Cybersecurity';
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        el.appendChild(cursor);
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                el.insertBefore(document.createTextNode(text[i++]), cursor);
+                setTimeout(type, 45);
+            }
+        }
+        setTimeout(type, 400);
+    })();
+
+    // Animated counters
+    (function () {
+        function animateCounter(el) {
+            const target = +el.dataset.target;
+            const suffix = el.dataset.suffix || '';
+            const duration = 1500;
+            const start = performance.now();
+            function step(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const value = Math.floor(ease * target);
+                el.textContent = (target >= 1000 ? value.toLocaleString() : value) + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { animateCounter(e.target); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number').forEach(el => observer.observe(el));
+    })();
+
+    // Scroll fade-in
+    (function () {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    })();
+
+    // Active nav highlight
+    (function () {
+        const sections = document.querySelectorAll('section[id], header[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+                    if (link) link.classList.add('active');
+                }
+            });
+        }, { threshold: 0.3 });
+        sections.forEach(s => observer.observe(s));
+    })();
+
+    // Card tilt
+    (function () {
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    })();
+
     (function () {
         const btn = document.getElementById('hamburger-btn');
         const menu = document.getElementById('mobile-menu');
